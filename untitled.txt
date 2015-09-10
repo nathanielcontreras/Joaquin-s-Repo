@@ -4,10 +4,12 @@ look_at <0,1,0>
 }
 light_source{<5,5,-8> 
         rgb<1,1,1>}
-sphere {<0,0,0>1
+sphere {<0,0,0>1 
+        translate<0,-.35,0>
     texture{ 
         pigment{
-            rgb <0,1,0>}}}
+            rgb <1,1,0>
+            }}}
 plane{
 <0,1,0>
 //normal vector
@@ -19,7 +21,7 @@ box{ <-1,0,-2> //near lower left corner
      translate<0,0,1>
      texture{
         pigment{
-            rgb<0,1,0>
+            rgb<1,1,0>
             }
          }
       }
@@ -30,16 +32,46 @@ cone{ <0,1,0>
       translate<-1,0,0>
       texture{
         pigment{
-            rgb<0,1,0>
+            rgb<1,0,0>
+            
             }
          }
       }
-torus { 4 //outer radius
+torus { 3 //outer radius
         1 //inner radius
+        translate<0,-.7,0>
         texture{
             pigment{
                 rgb<0,1,0>
                 }
              }
-          } 
-           
+          }
+cylinder {<0,1,0>, <0,1.01,0>, 0.8  
+           translate<0,-.38,0>
+           texture{
+                pigment{
+                    rgb<1,1,1> 
+                    }
+                  }
+                }
+#declare SolidYellow = texture{
+                         pigment{
+                            rgb<1,1,0>
+                            }
+                            };
+#declare SolidRed = texture{
+                        pigment{
+                            rgb<1,0,0>
+                            }
+                            };
+#declare SolidGreen = texture{
+                        pigment{
+                            rgb<0,1,0>
+                            }
+                            };
+cylinder {<0,1,0>, <.1,1.1,0>,.5
+            texture{SolidRed} translate <-.7,-.5,-.5>}
+             
+cylinder {<0,1,0>, <0,1.1,0>,3  
+            texture{SolidGreen} translate<0,-.8,0> }
+                                  
