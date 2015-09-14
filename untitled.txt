@@ -1,59 +1,9 @@
 background {rgb <1,0,0>}     
-camera { location <0,2,-5> 
+camera { location <4,4,-5> 
 look_at <0,1,0>
 }
 light_source{<5,5,-8> 
         rgb<1,1,1>}
-sphere {<0,0,0>1 
-        translate<0,-.35,0>
-    texture{ 
-        pigment{
-            rgb <1,1,0>
-            }}}
-plane{
-<0,1,0>
-//normal vector
-0
-}
-
-box{ <-1,0,-2> //near lower left corner
-     <1,0.5,0> //far upperright corner
-     translate<0,0,1>
-     texture{
-        pigment{
-            rgb<1,1,0>
-            }
-         }
-      }
-cone{ <0,1,0>
-      .1
-      <1,3,3>
-      1
-      translate<-1,0,0>
-      texture{
-        pigment{
-            rgb<1,0,0>
-            
-            }
-         }
-      }
-torus { 3 //outer radius
-        1 //inner radius
-        translate<0,-.7,0>
-        texture{
-            pigment{
-                rgb<0,1,0>
-                }
-             }
-          }
-cylinder {<0,1,0>, <0,1.01,0>, 0.8  
-           translate<0,-.38,0>
-           texture{
-                pigment{
-                    rgb<1,1,1> 
-                    }
-                  }
-                }
 #declare SolidYellow = texture{
                          pigment{
                             rgb<1,1,0>
@@ -69,9 +19,69 @@ cylinder {<0,1,0>, <0,1.01,0>, 0.8
                             rgb<0,1,0>
                             }
                             };
+#declare SolidBrown = texture {
+                        pigment {
+                        rgb <.59607843,.46274509,.36470588>
+                        }
+                        }
+#declare SolidGold = texture{
+                     pigment{
+                     rgb<.6,.65,.3>
+                     }
+                    }
+
+
+sphere {<0,0,0>1 
+        translate<0,0,0>
+    texture{ 
+        pigment{
+            rgb <1,1,0>
+            }}}
+plane{
+<0,1,0>
+//normal vector
+0
+}
+
+box{ <-1,1,-2> //near lower left corner
+     <1,0.5,0> //far upperright corner
+     translate<0,-.2,1>
+     texture {SolidYellow}}
+cone{ <0,1,0>
+      .1
+      <1,3,3>
+      1
+      translate<-1.1,.2,0>
+      texture{SolidGold
+      }
+     }
+torus { 2 //outer radius
+        1 //inner radius
+        translate<0,-.7,0>
+        texture{SolidBrown
+        }
+       }
+        
+cylinder {<0,1,0>, <0,1.01,0>, 0.9  
+           translate<0,-.05,0>
+           texture{
+                pigment{
+                    rgb<1,1,1> 
+                    }
+                  }
+                }
+
 cylinder {<0,1,0>, <.1,1.1,0>,.5
-            texture{SolidRed} translate <-.7,-.5,-.5>}
+            texture{SolidGold} 
+            translate <-.9,-.3,0>}
              
 cylinder {<0,1,0>, <0,1.1,0>,3  
-            texture{SolidGreen} translate<0,-.8,0> }
+            texture{SolidBrown} translate<0,-.8,0> }
+            
+box{ <-1,1,-2> //near lower left corner
+     <1,0.5,0> //far upperright corner
+     translate<-1.5,-.9,-1.5>
+     texture {SolidYellow}}
+            
+
                                   
