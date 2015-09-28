@@ -106,7 +106,7 @@ box { <500,ChairSeatHeight,800>
 box{  <0,500,800>
      <RoomWidth,RoomHeight,RoomLength>
      scale .07
-     translate <360,-20,725>
+     translate <360,-20,700>
      texture{
      pigment{
      rgb<1,0,0>
@@ -115,7 +115,7 @@ box{  <0,500,800>
 box{  <0,500,800>
      <RoomWidth,RoomHeight,RoomLength>
      scale .07
-     translate <470,-20,725>
+     translate <470,-20,700>
      texture{
      pigment{
      rgb<1,0,0>
