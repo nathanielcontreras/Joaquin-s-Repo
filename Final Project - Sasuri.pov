@@ -54,7 +54,7 @@ box{  <0,0,0>
      translate <420,0,725>
      texture{
      pigment{
-     rgb<1,0,0>
+     rgb<1,1,1>
      }}}
 
 #declare ChairWidth = 54;
@@ -85,7 +85,7 @@ box{  <0,0,0>
             #declare index = 0;
                 texture {
                 pigment {
-                 rgb <1,0,0>
+                 rgb <1,1,1>
                  }}
                };
 object { Chair 
@@ -98,7 +98,7 @@ box { <500,ChairSeatHeight,800>
        translate <-50,-30,-50>
       texture{
         pigment{
-         rgb<1,0,0> 
+         rgb<1,1,1> 
          }
        }
      }                               
@@ -109,7 +109,7 @@ box{  <0,500,800>
      translate <360,-20,700>
      texture{
      pigment{
-     rgb<1,0,0>
+     rgb<1,1,1>
      }}}    
      
 box{  <0,500,800>
@@ -118,7 +118,7 @@ box{  <0,500,800>
      translate <470,-20,700>
      texture{
      pigment{
-     rgb<1,0,0>
+     rgb<1,1,1>
      }}}  
      
 box{  <0,500,950>
@@ -128,14 +128,14 @@ box{  <0,500,950>
      translate <385,-20,725>
      texture{
      pigment{
-     rgb<1,0,0>
+     rgb<1,1,1>
      }}} 
      
 sphere { <-5.00, 0.75, -2.0>, 0.75 
             translate < 400,0,800 >
             texture{ 
             pigment{
-                rgb <1,0,0> 
+                rgb <1,1,1> 
                 }
               }
             }
@@ -147,5 +147,5 @@ box{  <0,500,950>
      translate <385,-20,880>
      texture{
      pigment{
-     rgb<1,0,0>
+     rgb<1,1,1>
      }}}        
