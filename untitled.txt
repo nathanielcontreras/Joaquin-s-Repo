@@ -8,7 +8,7 @@ background { rgb <0,0,0>}
 #declare AngleOneLocation = <2,4,-8>;
 #declare TopLocation = <2,12,0>;
     
-camera { location AngleOneLocation 
+camera { location CurrentLocation 
 look_at <0,1,0> }
    
 light_source{<50,500,-8> 

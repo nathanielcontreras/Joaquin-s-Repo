@@ -1,0 +1,60 @@
+#declare RoomWidth = 932;
+#declare RoomLength = 1016;
+#declare RoomHeight = 435;
+#declare HalfRoomWidth = RoomWidth/2;
+#declare HalfRoomLength = RoomLength/2;
+#declare SeatedEyeHeight = 112;
+
+#declare CATlab = box{
+            <0,0,0>
+            <RoomWidth,RoomHeight,RoomLength>
+            }
+/*
+#declare Windows = box{
+            <,,>
+            <,,>
+            }*/
+            
+#declare DoorWidth = 91;
+#declare DoorHeight = 236;
+#declare DoorDepth = 16;
+#declare DoorDistanceFromRightWall = 188;
+#declare DoorwayCutout = box{
+        <0,0,-DoorDepth/2>
+        <DoorWidth,DoorHeight,DoorDepth/2>
+        translate <RoomWidth-DoorDistanceFromRightWall,0,RoomLength> };
+
+#declare MyLocation = <HalfRoomWidth,SeatedEyeHeight,40>;
+
+camera{
+    location MyLocation
+    look_at <HalfRoomWidth,SeatedEyeHeight,RoomLength>
+    }
+    
+light_source{
+            <HalfRoomWidth,SeatedEyeHeight,HalfRoomLength>
+            rgb<1,1,1>
+            }
+object{
+        CATlab
+        texture{
+            pigment{
+                rgb<1,1,1>
+                }
+               }
+              }
+              
+box{  <0,0,0>
+     <RoomWidth,RoomHeight,RoomLength>
+     scale .02
+     translate <500,0,800>
+     texture{
+     pigment{
+     rgb<1,0,1>
+     }}}
+              
+
+    
+    
+
+    
