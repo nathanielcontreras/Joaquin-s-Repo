@@ -1,3 +1,4 @@
+//MEASUREMENTS
 #declare RoomWidth = 932;
 #declare RoomLength = 1016;
 #declare RoomHeight = 435;
@@ -5,57 +6,60 @@
 #declare HalfRoomLength = RoomLength/2;
 #declare SeatedEyeHeight = 112;
 
-#declare CATlab = box{
-            <0,0,0>
-            <RoomWidth,RoomHeight,RoomLength>
+#declare SasurisDen = box{
+            <-100,0,-100>
+            <RoomWidth+100,RoomHeight,RoomLength+100>
             }
-/*
-#declare Windows = box{
-            <,,>
-            <,,>
-            }*/
-            
-#declare DoorWidth = 91;
-#declare DoorHeight = 236;
-#declare DoorDepth = 16;
-#declare DoorDistanceFromRightWall = 188;
-#declare DoorwayCutout = box{
-        <0,0,-DoorDepth/2>
-        <DoorWidth,DoorHeight,DoorDepth/2>
-        translate <RoomWidth-DoorDistanceFromRightWall,0,RoomLength> };
+//CAMERA SETTINGS            
+#declare TopBackOfRoom = <HalfRoomWidth,SeatedEyeHeight*3,-100>;
+#declare AngleFromTopRight = <RoomWidth,SeatedEyeHeight*3,40>;
+#declare AngleFromTopLeft = <0,SeatedEyeHeight*3,40>;
 
-#declare MyLocation = <HalfRoomWidth,SeatedEyeHeight,40>;
+#declare Origin = <0,0,0>;
+#declare FullImage = <HalfRoomWidth,SeatedEyeHeight,RoomLength>;
 
-camera{ 
-       //location<600,SeatedEyeHeight*3,800>        
-      location <HalfRoomWidth*2,SeatedEyeHeight*3,40>
-    //location MyLocation
-   //look_at <500,41,800>
-    look_at <HalfRoomWidth,SeatedEyeHeight,RoomLength>
-  //  look_at <0,0,0>
-    }
+//COLORS 
+#declare NoColorForLight = <1,1,1>;
+#declare FadedBlueForLight = <.5,.5,1>;
+#declare FadedBlue = pigment{
+                     rgb<.5,.5,1>
+};
+#declare NoColor = pigment{
+                   rgb<1,1,1>
+};
+#declare SolidRed = pigment{
+                    rgb<1,0,0>
+};
+
+camera{                     
+          //  location AngleFromTopRight
+         //   location AngleFromTopLeft 
+            location TopBackOfRoom
+   
+            look_at FullImage
+          //  look_at Origin
+}
     
 light_source{
             <HalfRoomWidth,SeatedEyeHeight,HalfRoomLength>
-            rgb<1,1,1>
+            rgb NoColorForLight
             }
 object{
-        CATlab
-        texture{
-            pigment{
-                rgb<1,1,1>
-                }
-               }
-              }
+        SasurisDen
+        
+        texture{NoColor 
+}
+}
               
 box{  <0,0,0>
      <RoomWidth,RoomHeight,RoomLength>
+     
      scale .07
      translate <420,0,725>
-     texture{
-     pigment{
-     rgb<1,1,1>
-     }}}
+     texture{NoColor
+}
+}
+
 
 #declare ChairWidth = 54;
 #declare ChairHeight = 81.5;
@@ -131,14 +135,6 @@ box{  <0,500,950>
      rgb<1,1,1>
      }}} 
      
-sphere { <-5.00, 0.75, -2.0>, 0.75 
-            translate < 400,0,800 >
-            texture{ 
-            pigment{
-                rgb <1,1,1> 
-                }
-              }
-            }
             
 box{  <0,500,950>
      <RoomWidth,RoomHeight,RoomLength>
@@ -148,4 +144,6 @@ box{  <0,500,950>
      texture{
      pigment{
      rgb<1,1,1>
-     }}}        
+     }}} 
+     
+            
