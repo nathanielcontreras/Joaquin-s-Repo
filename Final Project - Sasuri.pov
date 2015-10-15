@@ -17,12 +17,13 @@
             }
 //CAMERA SETTINGS            
 #declare TopFrontOfRoom = <HalfRoomWidth,SeatedEyeHeight*3,-100>;
-#declare CloseFrontOfRoom = <HalfRoomWidth-200,SeatedEyeHeight*2,350>;
+#declare CloseFrontOfRoom = <HalfRoomWidth,SeatedEyeHeight*2,350>;
+#declare TopAngleCloseFrontOfRoom = <HalfRoomWidth,SeatedEyeHeight*3.5,350>;
 #declare AngleFromTopRight = <RoomWidth,SeatedEyeHeight*3,40>;
 #declare AngleFromTopLeft = <0,SeatedEyeHeight*3,40>;
 #declare BackTopLeftCorner = <0,SeatedEyeHeight*3.5,RoomLength>;
 #declare BackTopRightCorner = <RoomWidth,SeatedEyeHeight*3.5,RoomLength>;
-#declare RightSideOfSasuri = <0,SeatedEyeHeight*2,ThreeFourthRoomLength>;
+#declare RightSideOfSasuri = <0,SeatedEyeHeight*1.3,ThreeFourthRoomLength>;
 #declare LeftSideOfSasuri = <RoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>;
 #declare SasuriFace = <HalfRoomWidth,SeatedEyeHeight*1.25,ThreeFourthRoomLength-120>;
 #declare SasuriFaceAngleOne = <HalfRoomWidth-100,SeatedEyeHeight*1.75,ThreeFourthRoomLength-120>;
@@ -47,22 +48,23 @@
 };
 #declare BrickPigment = pigment{
                 brick
-                color NoColor 
-                color SolidRed
+                color SolidBlack 
+                color SolidGrey
                 scale <10,10,10>
                 } 
 
 camera{                     
           //  location AngleFromTopRight
-         //   location AngleFromTopLeft 
+           // location AngleFromTopLeft 
           //  location TopFrontOfRoom
            // location CloseFrontOfRoom
-          //  location BackTopLeftCorner
+           // location TopAngleCloseFrontOfRoom
+           //  location BackTopLeftCorner
            // location BackTopRightCorner
-           // location RightSideOfSasuri
+            location RightSideOfSasuri
            // location LeftSideOfSasuri
           //    location SasuriFace
-              location SasuriFaceAngleOne 
+           //   location SasuriFaceAngleOne 
                
           //  look_at FullImage
            // look_at Origin
@@ -74,7 +76,7 @@ light_source{
             <HalfRoomWidth,SeatedEyeHeight,HalfRoomLength>
             rgb NoColorForLight
             shadowless
-            }
+            }  
 light_source{
             <HalfRoomWidth,SeatedEyeHeight*3.8,RoomLength>
             rgb NoColorForLight
@@ -88,6 +90,7 @@ light_source{
 light_source{
             <OneFourthRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>
             rgb NoColorForLight
+            
             shadowless
             }
 object{
@@ -129,7 +132,9 @@ object { Chair
             scale 2 
             rotate <0,180,0>
             translate <500,0,800> }
-sphere {
+
+#declare body = union {
+        sphere {
         <0,0,0>25 
         translate <HalfRoomWidth,SeatedEyeHeight*1.95,ThreeFourthRoomLength-50>
         texture{
@@ -137,7 +142,7 @@ sphere {
         rgb<0,1,1> 
         }}}
 
-sphere{ 
+        sphere{ 
         <0,0,0>30
         scale <0,2,0>
         rotate <-15,0,0>
@@ -146,6 +151,76 @@ sphere{
         pigment{
         rgb<0,1,1>
         }}}
+        
+        sphere { 
+        <0,0,0>10
+        translate <HalfRoomWidth-10,SeatedEyeHeight-20,ThreeFourthRoomLength-10>
+        texture{
+        pigment {
+        rgb<0,1,1>
+        }}}
+
+        sphere { 
+        <0,0,0>10
+        translate <HalfRoomWidth+10,SeatedEyeHeight-20,ThreeFourthRoomLength-10>
+        texture{
+        pigment {
+        rgb<0,1,1>
+        }}}
+        
+        torus {
+        20  // outer radius
+        10  // inner radius
+        scale <1.15,2,1>
+        rotate <-110,0,0>
+        translate <HalfRoomWidth,SeatedEyeHeight*1.55,ThreeFourthRoomLength-25>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+        torus {
+        25  // outer radius
+        10  // inner radius
+        scale <1,3,0.9>
+        rotate <-20,0,0>
+        translate <HalfRoomWidth,SeatedEyeHeight*1.45,ThreeFourthRoomLength-20>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+        };
+        
+object { body
+            translate <0,20,0>
+            }
+            
+/*torus {
+        20  // outer radius
+        10  // inner radius
+        scale <1.15,2.5,1>
+        rotate <-110,0,0>
+        translate <HalfRoomWidth,SeatedEyeHeight*1.75,ThreeFourthRoomLength-25>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+torus {
+        25  // outer radius
+        10  // inner radius
+        scale <1,3,0.9>
+        rotate <-15,0,0>
+        translate <HalfRoomWidth,SeatedEyeHeight*1.65,ThreeFourthRoomLength-20>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}*/        
+          
+
+
+              
 /*box{ 
         <-21,-30,-30> //near lower left corner
         <30,-.2,20> //far upperright corner

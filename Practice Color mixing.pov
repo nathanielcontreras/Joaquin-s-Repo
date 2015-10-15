@@ -33,9 +33,22 @@ light_source { <6,6,-8>
                      rgb<.6,.65,.3>
                      }
                     }
+#declare White = texture{
+                    pigment{
+                    rgb<1,1,1>
+                    }}
                        
 sphere{<0,0,0>2
-        texture{SolidBrown
-        } 
+        texture{White
+        }
+        normal{
+        bumps
+        scale .8
+        }
+        finish {
+           // ambient 0
+           // specular .5
+            diffuse .7
+            } 
        }
                                  
