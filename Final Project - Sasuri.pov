@@ -17,19 +17,20 @@
             }
 //CAMERA SETTINGS            
 #declare TopFrontOfRoom = <HalfRoomWidth,SeatedEyeHeight*3,-100>;
-#declare CloseFrontOfRoom = <HalfRoomWidth,SeatedEyeHeight*2,350>;
+#declare CloseFrontOfRoom = <HalfRoomWidth,SeatedEyeHeight*2,325>;
 #declare TopAngleCloseFrontOfRoom = <HalfRoomWidth,SeatedEyeHeight*3.5,350>;
 #declare AngleFromTopRight = <RoomWidth,SeatedEyeHeight*3,40>;
 #declare AngleFromTopLeft = <0,SeatedEyeHeight*3,40>;
 #declare BackTopLeftCorner = <0,SeatedEyeHeight*3.5,RoomLength>;
 #declare BackTopRightCorner = <RoomWidth,SeatedEyeHeight*3.5,RoomLength>;
-#declare RightSideOfSasuri = <0,SeatedEyeHeight*1.3,ThreeFourthRoomLength>;
-#declare LeftSideOfSasuri = <RoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>;
+#declare RightSideOfSasuri = <100,SeatedEyeHeight*2.3,ThreeFourthRoomLength-250>;
+#declare LeftSideOfSasuri = <RoomWidth,SeatedEyeHeight*2.3,ThreeFourthRoomLength-250>;
 #declare SasuriFace = <HalfRoomWidth,SeatedEyeHeight*1.25,ThreeFourthRoomLength-120>;
 #declare SasuriFaceAngleOne = <HalfRoomWidth-100,SeatedEyeHeight*1.75,ThreeFourthRoomLength-120>;
+#declare TopOfSasuri = <HalfRoomWidth,SeatedEyeHeight*3.5,RoomLength-250>;
 
 #declare Origin = <0,0,0>;
-#declare FullImage = <HalfRoomWidth,SeatedEyeHeight,RoomLength>;
+#declare FullImage = <HalfRoomWidth,SeatedEyeHeight*3,RoomLength>;
 #declare HeadOfSasuri = <HalfRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>;
 #declare FaceOfSasuri = <HalfRoomWidth,SeatedEyeHeight*1.9,ThreeFourthRoomLength-50>;
 
@@ -55,21 +56,22 @@
 
 camera{                     
           //  location AngleFromTopRight
-           // location AngleFromTopLeft 
-          //  location TopFrontOfRoom
+          //  location AngleFromTopLeft 
+           // location TopFrontOfRoom
            // location CloseFrontOfRoom
            // location TopAngleCloseFrontOfRoom
-           //  location BackTopLeftCorner
+            // location BackTopLeftCorner
            // location BackTopRightCorner
-            location RightSideOfSasuri
-           // location LeftSideOfSasuri
-          //    location SasuriFace
-           //   location SasuriFaceAngleOne 
-               
+             location RightSideOfSasuri
+          //  location LeftSideOfSasuri
+         //   location SasuriFace
+           //   location SasuriFaceAngleOne
+          //  location TopOfSasuri
+             
           //  look_at FullImage
            // look_at Origin
-           // look_at HeadOfSasuri
-            look_at FaceOfSasuri
+            look_at HeadOfSasuri
+           // look_at FaceOfSasuri
 }
     
 light_source{
@@ -133,7 +135,9 @@ object { Chair
             rotate <0,180,0>
             translate <500,0,800> }
 
-#declare body = union {
+#declare body = union { 
+
+//Sasuris Head
         sphere {
         <0,0,0>25 
         translate <HalfRoomWidth,SeatedEyeHeight*1.95,ThreeFourthRoomLength-50>
@@ -141,7 +145,8 @@ object { Chair
         pigment{
         rgb<0,1,1> 
         }}}
-
+          
+//Sasuris Torso
         sphere{ 
         <0,0,0>30
         scale <0,2,0>
@@ -189,13 +194,175 @@ object { Chair
         pigment{
         rgb<0,1,1>
         }}}
+                    
+//Sasuris Legs     
+     
+        //Sasuris Thighs
+      
+            sphere{ 
+        <0,0,0>30
+        scale <.45,.45,1.25>
+        rotate <0,10,0>
+        translate <HalfRoomWidth-17,SeatedEyeHeight-25,ThreeFourthRoomLength-40>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+            sphere{ 
+        <0,0,0>30
+        scale <.45,.45,1.25>
+        rotate <0,-10,0>
+        translate <HalfRoomWidth+17,SeatedEyeHeight-25,ThreeFourthRoomLength-40>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+     
+        //Sasuris knees
+        
+         sphere { 
+        <0,0,0>5
+        translate <HalfRoomWidth-23,SeatedEyeHeight-25,ThreeFourthRoomLength-80>
+        texture{
+        pigment {
+        rgb<0,1,1>
+        }}}
+        
+         sphere { 
+        <0,0,0>5
+        translate <HalfRoomWidth+23,SeatedEyeHeight-25,ThreeFourthRoomLength-80>
+        texture{
+        pigment {
+        rgb<0,1,1>
+        }}}
+        
+        // Sasuris Calves
+        
+           sphere{ 
+        <0,0,0>30
+        scale <.25,.25,1.25>
+        rotate <90,0,0>
+        translate <HalfRoomWidth-25,SeatedEyeHeight-60,ThreeFourthRoomLength-80>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+            sphere{ 
+        <0,0,0>30
+        scale <.25,.25,1.25>
+        rotate <90,0,0>
+        translate <HalfRoomWidth+25,SeatedEyeHeight-60,ThreeFourthRoomLength-80>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+            sphere{ 
+        <0,0,0>30
+        scale <.25,.30,.75>
+        rotate <90,0,0>
+        translate <HalfRoomWidth-25,SeatedEyeHeight-60,ThreeFourthRoomLength-78>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+            sphere{ 
+        <0,0,0>30
+        scale <.25,.30,.75>
+        rotate <90,0,0>
+        translate <HalfRoomWidth+25,SeatedEyeHeight-60,ThreeFourthRoomLength-78>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}} 
+         
+//Sasuris Arms
+
+           sphere{ 
+        <0,0,0>30
+        scale <.25,.25,1>
+        rotate <90,+15,-10>
+        translate <HalfRoomWidth-40,SeatedEyeHeight*1.35,ThreeFourthRoomLength-35>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+            sphere{ 
+        <0,0,0>30
+        scale <.25,.25,1>
+        rotate <90,-15,10>
+        translate <HalfRoomWidth+40,SeatedEyeHeight*1.35,ThreeFourthRoomLength-35>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+         sphere { 
+        <0,0,0>10
+        translate <HalfRoomWidth-28,SeatedEyeHeight+68,ThreeFourthRoomLength-33>
+        texture{
+        pigment {
+        rgb<0,1,1>
+        }}}
+        
+         sphere { 
+        <0,0,0>10
+        translate <HalfRoomWidth+28,SeatedEyeHeight+68,ThreeFourthRoomLength-33>
+        texture{
+        pigment {
+        rgb<0,1,1>
+        }}} 
+         
+        //Sasuris elbows and down 
+         
+        sphere { 
+        <0,0,0>6
+        translate <HalfRoomWidth-45,SeatedEyeHeight+10,ThreeFourthRoomLength-35>
+        texture{
+        pigment {
+        rgb<0,1,1>
+        }}}
+        
+         sphere { 
+        <0,0,0>6
+        translate <HalfRoomWidth+45,SeatedEyeHeight+10,ThreeFourthRoomLength-35>
+        texture{
+        pigment {
+        rgb<0,1,1>
+        }}}
+        
+         sphere{ 
+        <0,0,0>30
+        scale <.25,.25,1>
+        rotate <-15,-15,-10>
+        translate <HalfRoomWidth-40,SeatedEyeHeight,ThreeFourthRoomLength-65>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
+            sphere{ 
+        <0,0,0>30
+        scale <.25,.25,1>
+        rotate <-15,15,+10>
+        translate <HalfRoomWidth+40,SeatedEyeHeight,ThreeFourthRoomLength-65>
+        texture{
+        pigment{
+        rgb<0,1,1>
+        }}}
+        
         
         };
         
-object { body
-            translate <0,20,0>
-            }
-            
+object {
+             body
+            translate <0,20,-40>}  
+                               
+             
 /*torus {
         20  // outer radius
         10  // inner radius
