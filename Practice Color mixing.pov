@@ -1,8 +1,15 @@
+include "rad_def.inc"
 background { rgb<0,1,1> }
-camera { location <5,5,-5>
+camera { location <-50,50,-50>
 look_at <0,0,0> }
-light_source { <6,6,-8>
-                rgb<1,1,1> }
+light_source { <-50,50,-50>
+                rgb<1,1,1>
+                 } 
+global_settings{
+    radiosity{
+        Rad_Settings ( Radiosity_Default, off, off )
+         //Type, normal?, media? 
+         }}
 #declare SolidRed = texture{
                     pigment{
                     rgb<1,0,0>
@@ -38,9 +45,10 @@ light_source { <6,6,-8>
                     rgb<1,1,1>
                     }}
                        
-sphere{<0,0,0>2
+sphere{  <0,0,0> 2
         texture{White
         }
+        translate <-45,45,-45>
         normal{
         bumps
         scale .8
@@ -50,5 +58,19 @@ sphere{<0,0,0>2
            // specular .5
             diffuse .7
             } 
-       }
+       } 
+       
+box{
+            <-100,100,-100>
+            <0,0,0>
+           texture{
+           pigment{
+                brick
+                color <0,0,0> 
+                color <0,0,1>
+                scale 1
+                } 
+          
+           }
+           } 
                                  
