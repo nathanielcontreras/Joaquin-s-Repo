@@ -38,6 +38,7 @@
 #declare FullImage = <HalfRoomWidth,SeatedEyeHeight*3,RoomLength>;
 #declare HeadOfSasuri = <HalfRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>;
 #declare FaceOfSasuri = <HalfRoomWidth,SeatedEyeHeight*1.9,ThreeFourthRoomLength-50>;
+#declare Puddle = <HalfRoomWidth-200,1,ThreeFourthRoomLength-200>;
 
 //COLORS
 #declare NoColorForLight = <1,1,1>;
@@ -61,13 +62,13 @@
 
 camera{                     
           //  location AngleFromTopRight
-          //  location AngleFromTopLeft 
-          //  location TopFrontOfRoom
-           // location CloseFrontOfRoom
+           // location AngleFromTopLeft 
+           // location TopFrontOfRoom
+          //  location CloseFrontOfRoom
           //  location TopAngleCloseFrontOfRoom
-            location BackTopLeftCorner
+          //  location BackTopLeftCorner
            // location BackTopRightCorner
-           // location RightSideOfSasuri
+            location RightSideOfSasuri
            // location LeftSideOfSasuri
          //   location SasuriFace
            // location SasuriFaceAngleOne
@@ -77,24 +78,25 @@ camera{
            // look_at Origin
             look_at HeadOfSasuri
            // look_at FaceOfSasuri
+           //look_at Puddle
 }
     
-/*light_source{
+light_source{
             <HalfRoomWidth,SeatedEyeHeight,HalfRoomLength>
             rgb NoColorForLight
             shadowless
-            }*/  
-light_source{
-            <HalfRoomWidth,SeatedEyeHeight*3.8,RoomLength>
-            rgb NoColorForLight
-            shadowless
-            }
+            }  
 /*light_source{
-            <ThreeFourthRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>
+            <HalfRoomWidth,SeatedEyeHeight*3.8,RoomLength>
             rgb NoColorForLight
             shadowless
             } */
 /*light_source{
+            <ThreeFourthRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>
+            rgb NoColorForLight
+            shadowless
+            } 
+light_source{
             <OneFourthRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>
             rgb NoColorForLight
             
@@ -473,19 +475,19 @@ object { Chair
        1
        scale 1
        rotate <90,0,0>
-       translate <HalfRoomWidth-200,SeatedEyeHeight+50 + Index * 75,ThreeFourthRoomLength-50>
+       translate <HalfRoomWidth-200,SeatedEyeHeight+50 + Index * 75,ThreeFourthRoomLength-150>   
        }
        #declare Index = Index+.05;       
        #end
-       } 
+       texture{
+       pigment{
+       image_map{jpeg "ChromeForChain.jpg"
+       }}}}
        
 object{ chain
-        rotate <0,0,45>
-         }
-
-object{ chain
-        translate <HalfRoomWidth,SeatedEyeHeight,ThreeFourthRoomLength>
         }
+
+
       
 
 
@@ -523,26 +525,71 @@ object {
            }
           }
          }  
+
             
-sphere{ <0,0,0> 1
-            scale <50,0,50>
-            translate<HalfRoomWidth-200,1,ThreeFourthRoomLength-200>
-            texture{
+#declare WaterTexture =
             pigment{
             image_map{jpeg "WaterPuddle.jpg"
-            }scale 20
+            }scale .5
             turbulence <.2,.2,.4>
-}}}
+}; 
+#declare ClearPigment = 
+                        pigment{
+                        rgbt <.3,.3,.65,.2>
+                        }; 
+                        
+                       
+                       
+                       
+                       
+                        sphere{ <0,0,0> 1
+                         scale <75,0,75>
+                             translate<HalfRoomWidth-200,1,ThreeFourthRoomLength-200>
+                         interior{ 
+                         ior 1.33
+                         }
+                         texture{
+                         finish{ 
+                         specular .2
+                         roughness .05
+                         
+                         reflection{ .1 } }
+                         normal{ 
+                         bumps .9 
+                         scale <25,50,10> }
+                       pigment{
+                    //      gradient y
+                      //     pigment_map{
+                        // [0 WaterTexture ]
+                    //[.5 ClearPigment ]  
+                   // }
+                   ClearPigment 
+                   //scale 50
+                          
+
+
+}
+}}
 
 box{ <2000,1,2000>1
-    translate <0,0,-100>
+    translate <-100,0,-100>
     texture{
     pigment{
     image_map{jpeg "ConcreteFloor.jpg" }
     rotate <90,0,0>
     scale 700
+    
    }
-  }  }                      
+  }  }
+  
+box{ <300,20,75>1
+        translate <HalfRoomWidth-150,SeatedEyeHeight*3,ThreeFourthRoomLength-150>
+        texture{
+        pigment{
+        rgb<1,1,1>
+        }}}
+        
+                      
         
 //box{ <50,50,50>                               
              
