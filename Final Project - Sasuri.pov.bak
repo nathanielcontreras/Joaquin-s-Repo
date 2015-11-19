@@ -32,12 +32,15 @@
 #declare LeftSideOfSasuri = <RoomWidth,SeatedEyeHeight*2.3,ThreeFourthRoomLength-250>;
 #declare SasuriFace = <HalfRoomWidth,SeatedEyeHeight*1.25,ThreeFourthRoomLength-120>;
 #declare SasuriFaceAngleOne = <HalfRoomWidth-100,SeatedEyeHeight*1.75,ThreeFourthRoomLength-120>;
-#declare TopOfSasuri = <HalfRoomWidth,SeatedEyeHeight*3.5,RoomLength-250>;
+#declare TopOfSasuri = <HalfRoomWidth,SeatedEyeHeight*3.8,RoomLength-250>;
+#declare ChainCameraAngleLeft = <100,SeatedEyeHeight*3.5,RoomLength-200>;
 
 #declare Origin = <0,0,0>;
 #declare FullImage = <HalfRoomWidth,SeatedEyeHeight*3,RoomLength>;
-#declare HeadOfSasuri = <HalfRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>;
+#declare HeadOfSasuri = <0,SeatedEyeHeight*2,ThreeFourthRoomLength>;
 #declare FaceOfSasuri = <HalfRoomWidth,SeatedEyeHeight*1.9,ThreeFourthRoomLength-50>;
+#declare Puddle = <HalfRoomWidth-200,1,ThreeFourthRoomLength-200>; 
+#declare OverHeadLight = <HalfRoomWidth-150,SeatedEyeHeight*3,ThreeFourthRoomLength-150>;
 
 //COLORS
 #declare NoColorForLight = <1,1,1>;
@@ -62,45 +65,58 @@
 camera{                     
           //  location AngleFromTopRight
           //  location AngleFromTopLeft 
-          //  location TopFrontOfRoom
-           // location CloseFrontOfRoom
+            location TopFrontOfRoom
+          //  location CloseFrontOfRoom
           //  location TopAngleCloseFrontOfRoom
-            location BackTopLeftCorner
+           // location BackTopLeftCorner
            // location BackTopRightCorner
-           // location RightSideOfSasuri
+          //  location RightSideOfSasuri
            // location LeftSideOfSasuri
          //   location SasuriFace
            // location SasuriFaceAngleOne
-           // location TopOfSasuri
+          //  location TopOfSasuri
+           // location ChainCameraAngleLeft
              
           //  look_at FullImage
            // look_at Origin
             look_at HeadOfSasuri
            // look_at FaceOfSasuri
-}
-    
-/*light_source{
+           //look_at Puddle
+           //look_at OverHeadLight
+}    
+light_source{
             <HalfRoomWidth,SeatedEyeHeight,HalfRoomLength>
             rgb NoColorForLight
             shadowless
-            }*/  
+            }  
 light_source{
             <HalfRoomWidth,SeatedEyeHeight*3.8,RoomLength>
             rgb NoColorForLight
             shadowless
-            }
-/*light_source{
+            } 
+light_source{
             <ThreeFourthRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>
             rgb NoColorForLight
             shadowless
-            } */
-/*light_source{
+            } 
+light_source{
             <OneFourthRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>
             rgb NoColorForLight
-            
             shadowless
-            } */
-object{
+            }
+/*light_source{
+            <HalfRoomWidth,SeatedEyeHeight*3,ThreeFourthRoomLength-120> 
+            rgb NoColorForLight*2
+            shadowless
+            spotlight
+            point_at <HalfRoomWidth,0,ThreeFourthRoomLength-120>
+            radius 15
+            falloff 70
+            }*/
+
+
+
+object{     
         SasurisDen
         
         texture{BrickPigment 
@@ -473,19 +489,30 @@ object { Chair
        1
        scale 1
        rotate <90,0,0>
-       translate <HalfRoomWidth-200,SeatedEyeHeight+50 + Index * 75,ThreeFourthRoomLength-50>
+       translate <HalfRoomWidth-200,SeatedEyeHeight+50 + Index * 75,ThreeFourthRoomLength-150>   
        }
        #declare Index = Index+.05;       
        #end
-       } 
+       texture{
+       pigment{
+       image_map{jpeg "ChromeForChain.jpg"
+       }}}}
        
 object{ chain
-        rotate <0,0,45>
-         }
-
+        translate <75,195,15>
+}
 object{ chain
-        translate <HalfRoomWidth,SeatedEyeHeight,ThreeFourthRoomLength>
-        }
+        translate <75,195,60>
+}
+object{ chain
+        translate <325,195,15>
+}
+object{ chain
+        translate <325,195,60>
+}
+        
+
+
       
 
 
@@ -523,19 +550,82 @@ object {
            }
           }
          }  
+
             
-sphere{ <0,0,0> 1
-            scale <50,0,50>
-            translate<HalfRoomWidth-200,1,ThreeFourthRoomLength-200>
-            texture{
+#declare WaterTexture =
             pigment{
             image_map{jpeg "WaterPuddle.jpg"
-            }scale 20
+            }scale .5
             turbulence <.2,.2,.4>
+}; 
+#declare ClearPigment = 
+                        pigment{
+                        rgbt <.3,.3,.65,.7>
+                        }; 
+                        
+                       
+                       
+                       
+                       
+sphere{ <0,0,0> 1
+                         scale <75,0,75>
+                             translate<HalfRoomWidth-200,1,ThreeFourthRoomLength-200>
+                         interior{ 
+                         ior 1.33
+                         }
+                         texture{
+                         finish{ 
+                         specular .2
+                         roughness .05
+                         
+                         reflection{ 15 } }
+                         normal{ 
+                         bumps .9 
+                         scale <25,50,10> }
+                       pigment{
+                    //      gradient y
+                      //     pigment_map{
+                        // [0 WaterTexture ]
+                    //[.5 ClearPigment ]  
+                   // }
+                   ClearPigment 
+                   //scale 50
+                          
+
+
+}}} 
+
+sphere{ <0,0,0> 1
+                         scale <50,0,50>
+                             translate<HalfRoomWidth-300,1,ThreeFourthRoomLength-200>
+                         interior{ 
+                         ior 1.33
+                         }
+                         texture{
+                         finish{ 
+                         specular .2
+                         roughness .05
+                         
+                         reflection{ 15 } }
+                         normal{ 
+                         bumps .9 
+                         scale <25,50,10> }
+                       pigment{
+                    //      gradient y
+                      //     pigment_map{
+                        // [0 WaterTexture ]
+                    //[.5 ClearPigment ]  
+                   // }
+                   ClearPigment 
+                   //scale 50
+                          
+
+
 }}}
 
+
 box{ <2000,1,2000>1
-    translate <0,0,-100>
+    translate <-100,0,-100>
     texture{
     pigment{
     image_map{jpeg "ConcreteFloor.jpg" }
@@ -543,9 +633,77 @@ box{ <2000,1,2000>1
     scale 700
     
    }
-  }  }                      
+  }  }
+  
+  
+box{ <2000,1,2000>1
+    translate <-100,430,-100>
+    texture{
+    pigment{
+    image_map{jpeg "CeilingTexture.jpg" }
+    rotate <90,0,0>
+    scale 200
+    }
+   }
+  }
+  
+difference {
+box{ <300,20,75>1
+        translate <HalfRoomWidth-150,SeatedEyeHeight*3,ThreeFourthRoomLength-150>
+        texture{
+        pigment{
+        image_map{jpeg "RustMetalTexture.jpg"
+        } 
+        scale 115
+       }
+      }
+     }
+     
+box{ <290,25,75>
+     <5,5,5>
+        translate <HalfRoomWidth-150,SeatedEyeHeight*2.9,ThreeFourthRoomLength-150> 
+        texture{
+        pigment{ 
+        image_map{jpeg "RustMetalTexture.jpg"   
+        }
+      }
+    }
+  } 
+}
+
+cylinder{ <275,25,75>, <5,5,5>10                                              
+            rotate <0,12,-3>
+            translate <HalfRoomWidth-150,SeatedEyeHeight*3.02,ThreeFourthRoomLength-140>
+            texture{
+            pigment{
+            rgb<1,1,1>
+            }
+           }
+          }
+cylinder{ <275,25,75>, <5,5,5>10                                              
+            rotate <0,12,-3>
+            translate <HalfRoomWidth-150,SeatedEyeHeight*3.02,ThreeFourthRoomLength-100>
+            texture{
+            pigment{
+            rgb<1,1,1>
+            }
+           }
+          }     
+
         
-//box{ <50,50,50>                               
+                      
+        
+box{ <30,40,50>
+     <25,100,150>
+    translate<-129,-30,ThreeFourthRoomLength-200>
+    texture{
+    pigment{
+    rgb <1,1,1>
+    }}}                               
+
+
+
+
              
 /*torus {
         20  // outer radius
