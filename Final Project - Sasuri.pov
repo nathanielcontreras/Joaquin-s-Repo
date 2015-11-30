@@ -66,19 +66,19 @@
                 } 
 
 camera{                     
-            location AngleFromTopRight
+           // location AngleFromTopRight
           //  location AngleFromTopLeft 
           //  location TopFrontOfRoom
            // location CloseFrontOfRoom
           //  location TopAngleCloseFrontOfRoom
-           // location BackTopLeftCorner
+          //  location BackTopLeftCorner
            // location BackTopRightCorner
           //  location RightSideOfSasuri
            // location LeftSideOfSasuri
          //   location SasuriFace
            // location SasuriFaceAngleOne
           //  location TopOfSasuri
-           // location ChainCameraAngleLeft
+            location ChainCameraAngleLeft
           //  location PostionToLookAtDrain
              
           //  look_at FullImage
@@ -575,7 +575,7 @@ object{ chain
 //Original body        
     object {
              body
-            translate <0,20,-20>
+            translate <0,20,0>
             texture{
             pigment{
             image_map{jpeg "WoodenPuppet2.jpg" 
