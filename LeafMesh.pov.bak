@@ -14,7 +14,7 @@ light_source{
             rgb <1,1,1>
 }
 
-#declare Plant1 = 
+#declare Leaf1 = 
 
 mesh{
         triangle{
@@ -53,7 +53,7 @@ union{
     #declare index = 0;
     #while (index < 360)
         object{
-            Plant1
+            Leaf1
             rotate <0,index,0>
        }
        #declare index = index +50;
@@ -65,7 +65,7 @@ union{
               }
             }
             
-#declare Plant2 = 
+#declare Leaf2 = 
 
 mesh{ 
         triangle{
@@ -106,7 +106,7 @@ union{
     #declare index = 0;
     #while ( index < 360)
         object{ 
-            Plant2
+            Leaf2
             rotate <0,index,0>
             }
         #declare index = index+50;

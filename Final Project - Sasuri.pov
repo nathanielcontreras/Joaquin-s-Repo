@@ -72,13 +72,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 camera{                     
-          //  location AngleFromTopRight
+            location AngleFromTopRight
           //  location AngleFromTopLeft 
           //  location TopFrontOfRoom
            // location CloseFrontOfRoom
            // location TopAngleCloseFrontOfRoom
           //  location BackTopLeftCorner
-            location BackTopRightCorner
+          //  location BackTopRightCorner
           //  location RightSideOfSasuri
            // location LeftSideOfSasuri
            // location SasuriFace
@@ -87,7 +87,7 @@ camera{
            // location ChainCameraAngleLeft
           //  location PostionToLookAtDrain
            // location LookFromDrain
-          //  location OppositeFromDrain
+           // location OppositeFromDrain
              
           //  look_at FullImage
            // look_at Origin
@@ -99,9 +99,9 @@ camera{
           
           
               aperture 20 
-              blur_samples 20
-              focal_point HeadOfSasuri
-       
+              blur_samples 50
+              focal_point HeadOfSasuri 
+                   
        }    
 
 
@@ -121,21 +121,21 @@ light_source{
             <ThreeFourthRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>
             rgb NoColorForLight
             shadowless
-            } 
-light_source{
+            } */
+/*light_source{
             <OneFourthRoomWidth,SeatedEyeHeight*2,ThreeFourthRoomLength>
             rgb NoColorForLight
             shadowless
-            }*/ 
+            } */
 light_source{
             <HalfRoomWidth,SeatedEyeHeight*3,ThreeFourthRoomLength-120> 
-            rgb NoColorForLight*5
+            rgb FadedBlueForLight*15
             shadowless
             spotlight
             point_at <HalfRoomWidth,0,ThreeFourthRoomLength-120>
-            radius 15
+            radius 1
             falloff 70
-            }  
+            }   
 
 
 
@@ -555,206 +555,209 @@ light_source{
                         translate <325,195,60>}
                 
 
-// Water Puddles            
-#declare WaterTexture =
-            pigment{
-            image_map{jpeg "WaterPuddle.jpg"}
-            scale .5
-            turbulence <.2,.2,.4>
-}; 
+// Hanging light body   
+       
+        difference {
+                    box{ <300,20,75>1
+                            translate <HalfRoomWidth-150,SeatedEyeHeight*3,ThreeFourthRoomLength-150>
+                            texture{ 
+                            uv_mapping
+                            pigment{
+                            image_map{jpeg "RustMetalTexture.jpg" } 
+                            scale 5
+                            }
+                            }
+                          }
+                    box{ <290,25,75>
+                            <5,5,5>
+                            translate <HalfRoomWidth-150,SeatedEyeHeight*2.9,ThreeFourthRoomLength-150> 
+                            texture{
+                            pigment{ 
+                            image_map{jpeg "RustMetalTexture.jpg" }
+                             }
+                             }
+                           } 
+                }
+// Light bulbs        
+        cylinder{ 
+                            <275,25,75>, <5,5,5>10                                              
+                            rotate <0,12,-3>
+                            translate <HalfRoomWidth-150,SeatedEyeHeight*3.02,ThreeFourthRoomLength-140>
+                            texture{
+                            pigment{rgb<1,1,1>}
+                                finish{ambient 1}
+                            }
+                }
+        
+        cylinder{   
+                            <275,25,75>, <5,5,5>10                                              
+                            rotate <0,12,-3>
+                            translate <HalfRoomWidth-150,SeatedEyeHeight*3.02,ThreeFourthRoomLength-100>
+                            texture{
+                            pigment{rgb<1,1,1>}
+                            }
+                }     
+             
 
-#declare ClearPigment = 
-            pigment{
-            rgbt <.3,.3,.65,.7>
-}; 
-                        
+
+
+// Water Puddles            
+                #declare WaterTexture =
+                            pigment{
+                            image_map{jpeg "WaterPuddle.jpg"}
+                            scale .5
+                            turbulence <.2,.2,.4>
+                }; 
+                
+                #declare ClearPigment = 
+                            pigment{
+                            rgbt <.3,.3,.65,.7>
+                }; 
+                                        
                                               
 
                 sphere{ <0,0,0> 1
                          scale <75,0,75>
                          translate<HalfRoomWidth-200,1,ThreeFourthRoomLength-200>
-                         interior{ 
-                         ior 1.33 }
-                         texture{
-                            finish{ 
-                            specular .2
-                            roughness .05 
-                            reflection{ 15 }
-                         }
-                         normal{ 
-                         bumps .9 
-                         scale <25,50,10> }
-                         /*pigment{
-                           gradient y
-                           pigment_map{
-                           [0 WaterTexture ]
-                           [.5 ClearPigment ]  
-                           }
-                           ClearPigment 
-                           scale 50 } */
-                          }
-                }
+                         interior{ ior 1.33 }
+                            texture{
+                                finish{ 
+                                specular .2
+                                roughness .05 
+                                reflection{ 15 }
+                                       }
+                                normal{ 
+                                bumps .9 
+                                scale <25,50,10> }
+                             }  
+                        }
                           
                 sphere{ <0,0,0> 1
                          scale <50,0,50>
                          translate<HalfRoomWidth-300,1,ThreeFourthRoomLength-200>
-                         interior{ 
-                         ior 1.33}
-                         texture{
-                            finish{ 
-                            specular .2
-                            roughness .05
-                            reflection{ 15 } 
-                         }
-                         normal{ 
-                         bumps .9 
-                         scale <25,50,10> }
-                       /*pigment{
-                         gradient y
-                         pigment_map{
-                         [0 WaterTexture ]
-                         [.5 ClearPigment ] }
-                         ClearPigment 
-                         scale 50 } */
-                         }
-                 }
+                         interior{ ior 1.33}
+                            texture{
+                                finish{ 
+                                specular .2
+                                roughness .05
+                                reflection{ 15 } 
+                                       }
+                                normal{ 
+                                bumps .9 
+                                scale <25,50,10> }
+                            }
+                        }
                  
 
 
+//Flooring
 
+                box{ <2000,1,2000>1
+                    translate <-100,0,-100>
+                    texture{
+                    pigment{
+                    image_map{jpeg "ConcreteFloor.jpg" }
+                    rotate <90,0,0>
+                    scale 700
+                    }
+                    }
+                }  
 
-box{ <2000,1,2000>1
-    translate <-100,0,-100>
-    texture{
-    pigment{
-    image_map{jpeg "ConcreteFloor.jpg" }
-    rotate <90,0,0>
-    scale 700
-    }
-    }
-}  
-  
-box{ <2000,1,2000>1
-    translate <-100,430,-100>
-    texture{
-    pigment{
-    image_map{jpeg "CeilingTexture.jpg" }
-    rotate <90,0,0>
-    scale 200
-    }
-    }
-}
-  
-difference {
-    box{ <300,20,75>1
-            translate <HalfRoomWidth-150,SeatedEyeHeight*3,ThreeFourthRoomLength-150>
-            texture{ 
-            uv_mapping
-            pigment{
-            image_map{jpeg "RustMetalTexture.jpg" } 
-            scale 5
-            }
-            }
-          }
-    box{ <290,25,75>
-            <5,5,5>
-            translate <HalfRoomWidth-150,SeatedEyeHeight*2.9,ThreeFourthRoomLength-150> 
-            texture{
-            pigment{ 
-            image_map{jpeg "RustMetalTexture.jpg" }
-             }
-             }
-           } 
-}
-
-cylinder{ <275,25,75>, <5,5,5>10                                              
-            rotate <0,12,-3>
-            translate <HalfRoomWidth-150,SeatedEyeHeight*3.02,ThreeFourthRoomLength-140>
-            texture{
-            
-            pigment{
-            rgb<1,1,1> 
-             }
-             finish{
-            ambient 1 }
-            }
-}
-
-cylinder{ <275,25,75>, <5,5,5>10                                              
-            rotate <0,12,-3>
-            translate <HalfRoomWidth-150,SeatedEyeHeight*3.02,ThreeFourthRoomLength-100>
-            texture{
-            pigment{
-            rgb<1,1,1>
-            }
-            }
-}     
-
+//Ceiling  
+                box{ <2000,1,2000>1
+                    translate <-100,430,-100>
+                    texture{
+                    pigment{
+                    image_map{jpeg "CeilingTexture.jpg" }
+                    rotate <90,0,0>
+                    scale 200
+                    }
+                    }
+                }
         
                       
-    //Drain        
-        box{ <30,40,50>
-           <25,100,160>                                                                     
-          translate<-129,-40,ThreeFourthRoomLength-200>
-          texture{
-          pigment{
-          rgb <0,0,0>
-         }}}
+//Drain        
+                box{ <30,40,50>
+                   <25,100,160>                                                                     
+                  translate<-129,-40,ThreeFourthRoomLength-200>
+                  texture{
+                  pigment{
+                  rgb <0,0,0>
+                 }}}
        
        
-    //Iron bars
-        box{ <30,40,50>
-           <25,100,60>
-           translate <-128,-40,ThreeFourthRoomLength-201>
-           texture{
-           pigment{
-           image_map{ jpeg "IronTexture.jpg" } scale 15
-         }}} 
-     
-        box{ <30,40,50>
-             <25,100,60>
-             translate <-128,-40,ThreeFourthRoomLength-176>
-          texture{
-          pigment{
-          image_map{ jpeg "IronTexture.jpg" }scale 15
-          }}}
-     
-        box{ <30,40,50>
-          <25,100,60>
-          translate <-128,-40,ThreeFourthRoomLength-151>
-          texture{
-         pigment{
-         image_map{ jpeg "IronTexture.jpg" } scale 15
-         }}}  
-         
-        box{ <30,40,50>
-             <25,100,60>
-             translate <-128,-40,ThreeFourthRoomLength-126>
-             texture{
-             pigment{
-            image_map{ jpeg "IronTexture.jpg" } scale 15
-            }}}
-     
-        box{ <30,40,50>
-             <25,100,60>
-            translate <-128,-40,ThreeFourthRoomLength-101>
-           texture{
-           pigment{
-          image_map{ jpeg "IronTexture.jpg" } scale 15
-             }}}
-             
-         box{ <30,40,50>
-              <125,10,160>
-              translate <-125,-38,ThreeFourthRoomLength-201>
-              texture{ 
-              uv_mapping
-              pigment{
-              image_map{ jpeg "ConcreteFloor.jpg" }
-              scale 1.65
-             // turbulence 4
-              
-              }}} 
-              
+        //Iron bars for drain
+        
+                box{ 
+                    <30,40,50>
+                    <25,100,60>
+                    translate <-128,-40,ThreeFourthRoomLength-201>
+                    texture{
+                        pigment{
+                        image_map{ jpeg "IronTexture.jpg" } scale 15
+                               } 
+                           }
+                }           
+                
+                box{ 
+                    <30,40,50>
+                    <25,100,60>
+                    translate <-128,-40,ThreeFourthRoomLength-176>
+                    texture{
+                        pigment{
+                        image_map{ jpeg "IronTexture.jpg" }scale 15
+                               }
+                           }
+                }           
+                
+                box{ 
+                    <30,40,50>
+                    <25,100,60>
+                    translate <-128,-40,ThreeFourthRoomLength-151>
+                    texture{
+                        pigment{
+                        image_map{ jpeg "IronTexture.jpg" } scale 15
+                               }  
+                           }
+                }
+                           
+                box{ 
+                    <30,40,50>
+                    <25,100,60>
+                    translate <-128,-40,ThreeFourthRoomLength-126>
+                    texture{
+                        pigment{
+                        image_map{ jpeg "IronTexture.jpg" } scale 15
+                               }
+                           }
+                }
+                           
+                box{ 
+                    <30,40,50>
+                    <25,100,60>
+                    translate <-128,-40,ThreeFourthRoomLength-101>
+                    texture{
+                        pigment{
+                        image_map{ jpeg "IronTexture.jpg" } scale 15
+                               }
+                           }
+                 }
+                           
+                 box{ 
+                    <30,40,50>
+                    <125,10,160>
+                    translate <-125,-38,ThreeFourthRoomLength-201>
+                    texture{ 
+                    uv_mapping
+                        pigment{
+                        image_map{ jpeg "ConcreteFloor.jpg" }
+                        scale 1.65
+                               }
+                            }
+                  }             
+                      
+                      
+                      
 
 
 
@@ -825,10 +828,125 @@ object { BenchLeg
                    
 object { BenchLeg
                  translate <485,0,0>
-                   }                   
-                                          
+                   }
+                   
+                   
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#declare Plant1 = 
+
+mesh{
+        triangle{
+                <0,0,0>
+                <20,40,0>
+                <20,30,-10>
+                }
+                
+        triangle{
+                <0,0,0>
+                <20,40,0>
+                <20,30,10>
+                }
+                
+        triangle{
+                <60,30,0>
+                <20,40,0>
+                <20,30,10>
+                }
+                
+        triangle{
+                <60,30,0>
+                <20,40,0>
+                <20,30,-10>
+                }
+                
+        texture{
+            pigment{
+                image_map{ jpeg "LeafTexture.jpg"
+                }
+              }
+            }
+            translate <HalfRoomWidth-280,SeatedEyeHeight-140,ThreeFourthRoomLength-50>
+            scale 250
+            }
+             
+union{ 
+    #declare index = 0;
+    #while (index < 360)
+        object{
+            Plant1
+            rotate <0,index,0>
+       }
+       #declare index = index +50;
+       #end 
+       texture{
+            pigment{
+                rgb<.3,.6,.35>
+                }
+              }
+            }
+            
+#declare Plant2 = 
+
+mesh{ 
+        triangle{
+                <0,0,0>
+                <10,20,0,>
+                <10,20,-10,>
+                }
+        triangle{
+                <0,0,0>
+                <10,20,0>
+                <10,20,10>
+                }
+        triangle{
+                <30,20,0,>
+                <10,20,0>
+                <10,20,-10>
+                }
+        triangle{
+                <30,20,0>
+                <10,20,0>
+                <10,20,10>
+                }
+        
+        texture{
+            pigment{
+                image_map{ jpeg "LeafTexture2.jpg"
+                }
+               }
+              }
+              
+             translate <HalfRoomWidth-280,SeatedEyeHeight-90,ThreeFourthRoomLength-50>
+             scale 250
+             }
+              
+              
+              
+union{
+    #declare index = 0;
+    #while ( index < 360)
+        object{ 
+            Plant2
+            rotate <0,index,0>
+            }
+        #declare index = index+50;
+        #end
+        }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+                   
+box{
+    <-100,0,-100>
+    <RoomWidth+100,RoomHeight,RoomLength+100>
+        texture{
+            pigment{
+                image_map{ jpeg "MossyBrickWall.jpg" }
+                   }
+               }
+   }                                          
 
 
 
 
              
+                                          
