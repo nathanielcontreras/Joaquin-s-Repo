@@ -71,22 +71,22 @@ mesh{
         triangle{
                 <0,0,0>
                 <1,2,0,>
-                <1,2,-1,>
+                <1,2,-2,>
                 }
         triangle{
                 <0,0,0>
                 <1,2,0>
-                <1,2,1>
+                <1,2,2>
                 }
         triangle{
                 <3,2,0,>
                 <1,2,0>
-                <1,2,-1>
+                <1,2,-2>
                 }
         triangle{
                 <3,2,0>
                 <1,2,0>
-                <1,2,1>
+                <1,2,2>
                 }
         
         texture{
@@ -109,7 +109,7 @@ union{
             Plant2
             rotate <0,index,0>
             }
-        #declare index = index+50;
+        #declare index = index+15;
         #end
         }
         

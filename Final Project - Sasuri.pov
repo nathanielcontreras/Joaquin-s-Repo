@@ -53,10 +53,6 @@
 #declare NoColor = rgb<1,1,1>;
 #declare SolidGrey = rgb<.5,.5,.5>;
 #declare SolidBlack = rgb<0,0,0>;
-#declare SolidBlue = rgb<.6,.6,.6>;
-#declare SolidMaroon = rgb<.3,0,0>;
-#declare SolidRed = rgb<1,0,0>;
-
 #declare FadedBlue = pigment{
                      rgb<.5,.5,1>};
 
@@ -72,10 +68,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 camera{                     
-            location AngleFromTopRight
+            location AngleFromTopRight 
           //  location AngleFromTopLeft 
           //  location TopFrontOfRoom
-           // location CloseFrontOfRoom
+          //  location CloseFrontOfRoom
            // location TopAngleCloseFrontOfRoom
           //  location BackTopLeftCorner
           //  location BackTopRightCorner
@@ -87,19 +83,20 @@ camera{
            // location ChainCameraAngleLeft
           //  location PostionToLookAtDrain
            // location LookFromDrain
-           // location OppositeFromDrain
+           // location OppositeFromDrain + <0,50,0>
              
           //  look_at FullImage
            // look_at Origin
             look_at HeadOfSasuri
            // look_at FaceOfSasuri
-           //look_at Puddle
-           //look_at OverHeadLight
-          // look_at Drain 
+            //look_at Puddle
+            //look_at OverHeadLight
+          //  look_at Drain
+           // look_at <HalfRoomWidth+250,0,HalfRoomLength+100> 
           
           
-              aperture 20 
-              blur_samples 50
+             // aperture 20 
+             // blur_samples 50
               focal_point HeadOfSasuri 
                    
        }    
@@ -135,7 +132,9 @@ light_source{
             point_at <HalfRoomWidth,0,ThreeFourthRoomLength-120>
             radius 1
             falloff 70
-            }   
+            } 
+            
+   
 
 
 
@@ -294,36 +293,7 @@ light_source{
                 
                 
                 
-#declare Torso2 = union {
-                sphere{ 
-                <0,0,0>30
-                scale <0,2,0>
-                rotate <-15,0,0>
-                translate <HalfRoomWidth,SeatedEyeHeight*1.3,ThreeFourthRoomLength-15>}
-        
-                sphere { 
-                <0,0,0>10
-                translate <HalfRoomWidth-10,SeatedEyeHeight-20,ThreeFourthRoomLength-10>}
-
-                sphere { 
-                <0,0,0>10
-                translate <HalfRoomWidth+10,SeatedEyeHeight-20,ThreeFourthRoomLength-10>}
-        
-                torus {
-                20  // outer radius
-                10  // inner radius
-                scale <1.15,2,1>
-                rotate <-110,0,0>
-                translate <HalfRoomWidth,SeatedEyeHeight*1.55,ThreeFourthRoomLength-25>}
-        
-                torus {
-                25  // outer radius
-                10  // inner radius
-                scale <1,3,0.9>
-                rotate <-20,0,0>
-                translate <HalfRoomWidth,SeatedEyeHeight*1.45,ThreeFourthRoomLength-20>}
-                }        
-
+#declare Torso2 = object { Torso }
 
 #declare SasuriLegs2 = union {                
               //Sasuris Thighs      
@@ -464,7 +434,7 @@ light_source{
 
                 object{ SasuriHead2 }
                 
-                object{ Torso2 }          
+                object{ Torso }          
    
                 object{ SasuriLegs2 }     
      
@@ -764,10 +734,12 @@ light_source{
  
 object{     
         SasurisDen
-        
         texture{BrickPigment}
         } 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///   Bench   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #declare ChairWidth = 54;
 #declare ChairHeight = 81.5;
@@ -790,11 +762,11 @@ object{
             scale <4,0,0>
             translate<-80,0,0> 
              texture {
-              pigment {
-              rgb <1,1,1>
-                      }
-                     }               
-               };
+               pigment {
+               rgb <1,1,1>
+               }
+             }               
+        };
 
 object { Chair 
             scale <2.5,2,2> 
@@ -804,9 +776,9 @@ object { Chair
                 pigment{
                 image_map{jpeg "Concrete.jpg"} 
                 scale 50
-                       }
-                     }
-         }    
+                }
+              }
+        }    
 
 
 
@@ -817,22 +789,22 @@ object { Chair
           translate <HalfRoomWidth-280,SeatedEyeHeight-140,ThreeFourthRoomLength-50>
           texture{
           uv_mapping
-          pigment{
-          image_map{ jpeg "Concrete.jpg"} scale 1
-          }}
-          };
+                pigment{
+                image_map{ jpeg "Concrete.jpg"} scale 1
+                }
+          }
+     };
           
           
-object { BenchLeg
-                   }       
+object { BenchLeg }       
                    
 object { BenchLeg
-                 translate <485,0,0>
-                   }
+         translate <485,0,0> }
                    
                    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+///   Moss Under Bench   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #declare Plant1 = 
 
 mesh{
@@ -862,13 +834,10 @@ mesh{
                 
         texture{
             pigment{
-                image_map{ jpeg "LeafTexture.jpg"
-                }
-              }
+                image_map{ jpeg "LeafTexture.jpg"}
             }
-            translate <HalfRoomWidth-280,SeatedEyeHeight-140,ThreeFourthRoomLength-50>
-            scale 250
-            }
+         }
+}
              
 union{ 
     #declare index = 0;
@@ -876,15 +845,14 @@ union{
         object{
             Plant1
             rotate <0,index,0>
-       }
-       #declare index = index +50;
-       #end 
-       texture{
-            pigment{
-                rgb<.3,.6,.35>
-                }
-              }
-            }
+            translate <RoomWidth+250,0,RoomLength+100>}
+            #declare index = index +50;
+            #end 
+               texture{
+                    pigment{
+                        rgb<.3,.6,.35>}
+               }
+         }
             
 #declare Plant2 = 
 
@@ -893,33 +861,32 @@ mesh{
                 <0,0,0>
                 <10,20,0,>
                 <10,20,-10,>
-                }
+        }
         triangle{
                 <0,0,0>
                 <10,20,0>
                 <10,20,10>
-                }
+        }
         triangle{
                 <30,20,0,>
                 <10,20,0>
                 <10,20,-10>
-                }
+        }
         triangle{
                 <30,20,0>
                 <10,20,0>
                 <10,20,10>
-                }
+        }
         
         texture{
             pigment{
                 image_map{ jpeg "LeafTexture2.jpg"
                 }
-               }
-              }
-              
-             translate <HalfRoomWidth-280,SeatedEyeHeight-90,ThreeFourthRoomLength-50>
-             scale 250
-             }
+            }
+         }
+         translate<0,2,0>
+}             
+             
               
               
               
@@ -929,24 +896,113 @@ union{
         object{ 
             Plant2
             rotate <0,index,0>
-            }
+            translate <HalfRoomWidth+230,-18,HalfRoomLength+210>}
         #declare index = index+50;
         #end
         }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
-                   
-box{
-    <-100,0,-100>
-    <RoomWidth+100,RoomHeight,RoomLength+100>
+///   Moss Under Bench 2   /////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                   
+    object { Plant1 } 
+    
+                 union{ 
+                #declare index = 0;
+                #while (index < 360)
+                    object{
+                        Plant1
+                       // scale 4
+                        rotate <0,index,0>
+                        translate <RoomWidth+225,0,RoomLength+140>
+                        
+                   }
+                   #declare index = index +50;
+                   #end 
+                   texture{
+                        pigment{
+                            rgb<.3,.6,.35>
+                            }
+                          }
+                        }
+                     
+                
+                    
+                
+    
+    
+    
+    
+    
+    object { Plant2   }       
+      
+                  
+                    union{
+                    #declare index = 0;
+                    #while ( index < 180)
+                        object{ 
+                            Plant2
+                           // scale 4
+                            rotate <0,index,0>
+                            translate <HalfRoomWidth+227,-18,HalfRoomLength+240>
+                            }
+                        #declare index = index+20;
+                        #end
+                        }    
+                        
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                        
+///   Weeds sticking out of drain   //////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+ 
+ 
+ object { Plant1 scale .8
+            translate <-40,-10,ThreeFourthRoomLength-70> 
+             texture{
+                    pigment{
+                        image_map{ jpeg "LeafTexture3.jpg"}
+                    }
+                }
+                        
+ }
+ 
+ object { Plant2  scale .8
+            translate <-40,-10,ThreeFourthRoomLength-70> 
+                texture{
+                    pigment{
+                        image_map{ jpeg "LeafTexture6.jpg"}
+                    }
+                }
+                        
+ } 
+ 
+ object { Plant1  scale .8
+            translate <-40,5,ThreeFourthRoomLength-70> 
+                texture{
+                    pigment{
+                        image_map{ jpeg "LeafTexture5.jpg"}
+                    }
+                }
+                        
+ }
+            
+ object { Plant2  scale .8
+            translate <-40,5,ThreeFourthRoomLength-70> 
+                texture{
+                    pigment{
+                        image_map{ jpeg "LeafTexture6.jpg"}
+                    }
+                }
+                        
+ }
+ 
+ 
+ 
+box{ <-2,-175,-2> //near lower left corner
+     <1,1,1> //far upperright corner
+     rotate<0,0,0>
+     translate<-40,70,ThreeFourthRoomLength-60>
         texture{
             pigment{
-                image_map{ jpeg "MossyBrickWall.jpg" }
+                image_map{ jpeg "LeafTexture4.jpg" 
+                         }
                    }
                }
-   }                                          
-
-
-
-
-             
-                                          
+}                                                  
